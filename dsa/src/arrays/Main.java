@@ -19,4 +19,32 @@ public class Main {
         }
         return ans;
     }
+
+    public int[] repeatedNumber(final int[] A) {
+        
+        Map<Integer,Integer> map=new HashMap<>();
+        int[] res=new int[2];
+        
+        for(int i:A){
+            int v=0;
+            if(map.containsKey(i)){
+                v=map.get(i);
+            }            
+            map.put(i,v+1);
+        }
+        int n=A.length;
+        for(int i=1;i<=n;i++){
+            if(!map.containsKey(i)){
+                res[1]=i;
+            }else {
+                int x=map.get(i);
+            if(x==2){
+                res[0]=i;
+            }
+            }
+            
+        }
+        
+        return res;
+    }
 }
