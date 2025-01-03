@@ -34,6 +34,44 @@ public class Main {
 
         return slow;
     }
+	 public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true;
+
+        // Step 1: Find the middle of the linked list
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // Step 2: Reverse the second half of the list
+        ListNode secondHalf = reverseList(slow);
+
+        // Step 3: Compare the first and second halves
+        ListNode firstHalf = head, temp = secondHalf;
+        while (temp != null) {
+            if (firstHalf.val != temp.val) return false;
+            firstHalf = firstHalf.next;
+            temp = temp.next;
+        }
+
+        // Step 4: (Optional) Restore the list to its original form
+        reverseList(secondHalf);
+
+        return true;
+    }
+
+    // Helper method to reverse a linked list
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null, current = head;
+        while (current != null) {
+            ListNode nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        return prev;
+    }
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode temp = new ListNode();
         ListNode cur = temp;
